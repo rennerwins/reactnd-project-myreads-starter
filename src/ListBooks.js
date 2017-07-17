@@ -9,6 +9,7 @@ class ListBooks extends Component {
 		wantToRead: [],
 		read: []
 	}
+
 	componentDidMount() {
 		BooksAPI.getAll().then(res => {
 			this.setState({
@@ -18,6 +19,7 @@ class ListBooks extends Component {
 			})
 		})
 	}
+
 	render() {
 		return (
 			<div className="list-books">

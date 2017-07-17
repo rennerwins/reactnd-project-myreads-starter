@@ -21,7 +21,7 @@ const Book = props => {
 					</div>
 				</div>
 				<BookTitle title={book.title} />
-				<BookAuthors authors={book.authors[0]} />
+				<BookAuthors authors={book.authors} />
 			</div>
 		</li>
 	)
@@ -31,6 +31,7 @@ Book.propTypes = {
 	book: PropTypes.object.isRequired
 }
 
+// Book's cover component
 const BookCover = props => {
 	const { image } = props
 	return (
@@ -49,6 +50,7 @@ BookCover.propTypes = {
 	image: PropTypes.string.isRequired
 }
 
+// Book's title component
 const BookTitle = props => {
 	const { title } = props
 	return (
@@ -62,11 +64,19 @@ BookTitle.propTypes = {
 	title: PropTypes.string.isRequired
 }
 
+// Book's authors component
 const BookAuthors = props => {
 	const { authors } = props
 	return (
 		<div className="book-authors">
-			{authors}
+			{authors.map(name => {
+				return (
+					<span>
+						{name}
+						<br />
+					</span>
+				)
+			})}
 		</div>
 	)
 }
