@@ -6,8 +6,8 @@ class Search extends Component {
 		return (
 			<div className="search-books">
 				<div className="search-books-bar">
-          <Link to="/">
-            <a className="close-search">Close</a>
+          <Link className="close-search" to="/">
+            Close
           </Link>
 					<div className="search-books-input-wrapper">
 						<input type="text" placeholder="Search by title or author" />
