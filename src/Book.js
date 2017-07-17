@@ -20,12 +20,8 @@ const Book = props => {
 						</select>
 					</div>
 				</div>
-				<div className="book-title">
-					{book.title}
-				</div>
-				<div className="book-authors">
-					{book.authors[0]}
-				</div>
+				<BookTitle title={book.title} />
+				<BookAuthors authors={book.authors[0]} />
 			</div>
 		</li>
 	)
@@ -51,6 +47,28 @@ const BookCover = props => {
 
 BookCover.propTypes = {
 	image: PropTypes.string.isRequired
+}
+
+const BookTitle = props => {
+	const { title } = props
+	return (
+		<div className="book-title">
+			{title}
+		</div>
+	)
+}
+
+BookTitle.propTypes = {
+	title: PropTypes.string.isRequired
+}
+
+const BookAuthors = props => {
+	const { authors } = props
+	return (
+		<div className="book-authors">
+			{authors}
+		</div>
+	)
 }
 
 export default Book
