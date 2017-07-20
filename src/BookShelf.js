@@ -3,7 +3,7 @@ import Book from './Book'
 import PropTypes from 'prop-types'
 
 const BookShelf = props => {
-	const { shelfTitle, shelf } = props
+	const { shelfTitle, shelf, change } = props
 
 	return (
 		<div className="bookshelf">
@@ -13,7 +13,7 @@ const BookShelf = props => {
 			<div className="bookshelf-books">
 				<ol className="books-grid">
 					{shelf.map(data => {
-						return <Book key={data.id} book={data} />
+						return <Book key={data.id} book={data} change={change} />
 					})}
 				</ol>
 			</div>
@@ -23,7 +23,8 @@ const BookShelf = props => {
 
 BookShelf.propTypes = {
 	shelfTitle: PropTypes.string.isRequired,
-	shelf: PropTypes.array
+	shelf: PropTypes.array,
+	chnage: PropTypes.func
 }
 
 export default BookShelf

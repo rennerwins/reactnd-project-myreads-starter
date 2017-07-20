@@ -1,24 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import BookShelfChanger from './BookShelfChanger'
 
 const Book = props => {
-	const { book } = props
+	const { book, change } = props
 	return (
 		<li>
 			<div className="book">
 				<div className="book-top">
 					<BookCover image={book.imageLinks.thumbnail} />
-					<div className="book-shelf-changer">
-						<select>
-							<option value="none" disabled>
-								Move to...
-							</option>
-							<option value="currentlyReading">Currently Reading</option>
-							<option value="wantToRead">Want to Read</option>
-							<option value="read">Read</option>
-							<option value="none">None</option>
-						</select>
-					</div>
+					<BookShelfChanger shelf={book.shelf} change={change} book={book} />
 				</div>
 				<BookTitle title={book.title} />
 				<BookAuthors authors={book.authors} />
@@ -28,7 +19,8 @@ const Book = props => {
 }
 
 Book.propTypes = {
-	book: PropTypes.object.isRequired
+	book: PropTypes.object.isRequired,
+	change: PropTypes.func
 }
 
 // Book's cover component
@@ -71,7 +63,7 @@ const BookAuthors = props => {
 		<div className="book-authors">
 			{authors.map(name => {
 				return (
-					<span>
+					<span key={name}>
 						{name}
 						<br />
 					</span>
