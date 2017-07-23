@@ -24,7 +24,7 @@ const BookShelf = props => {
 BookShelf.propTypes = {
 	shelfTitle: PropTypes.string.isRequired,
 	shelf: PropTypes.array,
-	chnage: PropTypes.func
+	change: PropTypes.func
 }
 
 export default BookShelf
