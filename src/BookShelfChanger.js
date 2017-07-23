@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class BookShelfChanger extends Component {
+	static PropTypes = {
+		change: PropTypes.func.isRequired
+	}
 	constructor(props) {
 		super(props)
 
@@ -9,21 +13,18 @@ class BookShelfChanger extends Component {
 		}
 	}
 
-	handleChangeBookShelf = (event) => {
-    const { book, change } = this.props
-    let { value } = event.target
+	handleChangeBookShelf = event => {
+		const { book, change } = this.props
+		let { value } = event.target
 
-    this.setState({ shelf: value })
-    change(book, value)
-  }
+		this.setState({ shelf: value })
+		change(book, value)
+	}
 
 	render() {
 		return (
 			<div className="book-shelf-changer">
-				<select
-          value={this.state.shelf}
-          onChange={this.handleChangeBookShelf}
-				>
+				<select value={this.state.shelf} onChange={this.handleChangeBookShelf}>
 					<option value="none" disabled>
 						Move to...
 					</option>
