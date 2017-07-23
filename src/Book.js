@@ -8,11 +8,13 @@ const Book = props => {
 		<li>
 			<div className="book">
 				<div className="book-top">
-					<BookCover image={book.imageLinks.thumbnail} />
+					{book.imageLinks
+						? <BookCover image={book.imageLinks.thumbnail} />
+						: <BookCover />}
 					<BookShelfChanger shelf={book.shelf} change={change} book={book} />
 				</div>
 				<BookTitle title={book.title} />
-				<BookAuthors authors={book.authors} />
+				{book.authors && <BookAuthors authors={book.authors} />}
 			</div>
 		</li>
 	)
@@ -32,14 +34,15 @@ const BookCover = props => {
 			style={{
 				width: 128,
 				height: 193,
-				backgroundImage: `url(${image})`
+				backgroundImage: `url(${image})`,
+				backgroundColor: 'lightGray'
 			}}
 		/>
 	)
 }
 
 BookCover.propTypes = {
-	image: PropTypes.string.isRequired
+	image: PropTypes.string
 }
 
 // Book's title component
