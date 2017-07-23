@@ -20,8 +20,13 @@ class BooksApp extends React.Component {
 	}
 
 	changeBookShelf = async (book, shelf) => {
-		await BooksAPI.update(book, shelf)
-		this.getAllBook()
+		if (book.shelf !== shelf) {
+			await BooksAPI.update(book, shelf)
+			book.shelf = shelf
+			this.setState(prevState => ({
+				books: prevState.books.filter(data => data.id !== book.id).concat(book)
+			}))
+		}
 	}
 
 	render() {
@@ -30,11 +35,16 @@ class BooksApp extends React.Component {
 				<Route
 					exact
 					path="/"
-					render={() => <ListBooks books={this.state.books} change={this.changeBookShelf} />}
+					render={() =>
+						<ListBooks
+							books={this.state.books}
+							change={this.changeBookShelf}
+						/>}
 				/>
 				<Route
 					path="/search"
-					render={() => <Search books={this.state.books} change={this.changeBookShelf} />}
+					render={() =>
+						<Search books={this.state.books} change={this.changeBookShelf} />}
 				/>
 			</div>
 		)

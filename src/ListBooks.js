@@ -23,21 +23,24 @@ class ListBooks extends Component {
 				<div className="list-books-title">
 					<h1>MyReads</h1>
 				</div>
-				<div className="list-books-content">
-					<div>
-						<BookShelf
-							change={change}
-							shelf={currentlyReading}
-							shelfTitle="Currently Reading"
-						/>
-						<BookShelf
-							change={change}
-							shelf={wantToRead}
-							shelfTitle="Want To Read"
-						/>
-						<BookShelf change={change} shelf={read} shelfTitle="Read" />
-					</div>
-				</div>
+				{books.length > 0
+					? <div className="list-books-content">
+							<div>
+								<BookShelf
+									change={change}
+									shelf={currentlyReading}
+									shelfTitle="Currently Reading"
+								/>
+								<BookShelf
+									change={change}
+									shelf={wantToRead}
+									shelfTitle="Want To Read"
+								/>
+								<BookShelf change={change} shelf={read} shelfTitle="Read" />
+							</div>
+						</div>
+					: <h1 style={{ textAlign: 'center' }}>Loading...</h1>}
+
 				<div className="open-search">
 					<Link to="/search">Add a book</Link>
 				</div>

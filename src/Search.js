@@ -21,23 +21,28 @@ class Search extends Component {
 	updateQuery = event => {
 		let { value } = event.target
 		this.setState({ query: value })
-		this.searchBooks(value)
+		value ? this.searchBooks(value) : this.emptyList()
 	}
 
 	// Search books from api
 	searchBooks = async query => {
-		if (query === '') {
-			this.setState({ searchBooks: [] })
+		const res = await BooksAPI.search(query, 20)
+
+		if (res.error === undefined) {
+			// Check currently existing books
+			const checkShelf = res.map(book => {
+				const existingBook = this.props.books.find(data => data.id === book.id)
+				if (existingBook) book.shelf = existingBook.shelf
+				return book
+			})
+			this.setState({ searchBooks: checkShelf })
 		} else {
-			const res = await BooksAPI.search(query)
-			if (!res.error) {
-				res
-					? this.setState(() => ({ searchBooks: res }))
-					: this.setState(() => ({ searchBooks: [] }))
-			} else {
-				this.setState(() => ({ searchBooks: [] }))
-			}
+			this.emptyList()
 		}
+	}
+
+	emptyList = () => {
+		this.setState(() => ({ searchBooks: [] }))
 	}
 
 	render() {
