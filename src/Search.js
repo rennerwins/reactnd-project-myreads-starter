@@ -27,12 +27,21 @@ class Search extends Component {
 		const res = await BooksAPI.search(query, 20)
 
 		if (res.error === undefined) {
+			// Prevent book duplication
+			const checkBookDuplication = res.filter(
+				(book, index, arr) =>
+					arr.findIndex(b => {
+						return b.id === book.id
+					}) === index
+			)
+
 			// Check currently existing books
-			const checkShelf = res.map(book => {
+			const checkShelf = checkBookDuplication.map(book => {
 				const existingBook = this.props.books.find(data => data.id === book.id)
 				if (existingBook) book.shelf = existingBook.shelf
 				return book
 			})
+
 			this.setState({ searchBooks: checkShelf })
 		} else {
 			this.emptyList()
