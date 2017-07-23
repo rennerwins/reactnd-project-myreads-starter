@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './utils/BooksAPI'
 import Book from './Book'
-import QueryList from './utils/QueryList'
 import PropTypes from 'prop-types'
 
 class Search extends Component {
@@ -13,8 +12,7 @@ class Search extends Component {
 
 	state = {
 		query: '',
-		searchBooks: [],
-		queryList: QueryList
+		searchBooks: []
 	}
 
 	// Update query to local state
