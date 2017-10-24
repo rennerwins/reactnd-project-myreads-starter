@@ -21,3 +21,6 @@ npm start
 #yarn
 yarn start
 ```
+
+## License
+MIT
